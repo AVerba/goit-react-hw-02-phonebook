@@ -1,16 +1,9 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      goit-react-hw-01-components
-    </div>
-  );
-};
+import React, { Component } from 'react';
+
+import styles from './App.module.css';
+
+export default class App extends Component {
+  render() {
+    return <div>hello</div>;
+  }
+}
