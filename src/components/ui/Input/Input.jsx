@@ -12,7 +12,7 @@ export const Input = ({
   onChange,
 }) => {
   return (
-    <Container>
+    <>
       <Title>{title}</Title>
       <input
         type={type}
@@ -25,6 +25,6 @@ export const Input = ({
         autoComplete="off"
         required
       />
-    </Container>
+    </>
   );
 };

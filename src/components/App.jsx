@@ -71,6 +71,7 @@ export class App extends Component {
           addContact={this.addContact}
           contacts={this.state.contacts}
         />
+
         <Title>Contacts</Title>
         <ContactFilter onInput={this.filterInputHandler} />
         <ContactList

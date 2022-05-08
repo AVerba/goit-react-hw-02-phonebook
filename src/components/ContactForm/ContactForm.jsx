@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 import PhoneInput from 'react-phone-number-input';
-
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
+import 'react-phone-number-input/style.css';
 import PropTypes from 'prop-types';
-import styles from '../App.module.css';
+import styles from './ContactForm.module.css';
 import { Input } from '../ui/Input';
+import { Title } from '../ui/Title';
 
 export default class ContactForm extends Component {
   state = {
@@ -54,7 +54,7 @@ export default class ContactForm extends Component {
       <form onSubmit={this.formSubmitHandler} className={styles.form}>
         <label>
           Name:
-          <Input
+          <input
             type="text"
             name="name"
             placeholder="john doe"
@@ -70,7 +70,7 @@ export default class ContactForm extends Component {
             type="tel"
             name="number"
             defaultCountry="UA"
-            placeholder="+380 33 333 3333"
+            placeholder="000 00 00"
             initialValueFormat="national"
             className={styles.phoneInputCountry}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -79,7 +79,6 @@ export default class ContactForm extends Component {
             onChange={number => this.setState({ number })}
           />
         </label>
-
         <button
           className={styles.submitButton}
           type="submit"
@@ -91,3 +90,13 @@ export default class ContactForm extends Component {
     );
   }
 }
+ContactForm.propTypes = {
+  addContact: PropTypes.func,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    })
+  ),
+};
