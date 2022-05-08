@@ -5,7 +5,8 @@ import PhoneInput from 'react-phone-number-input';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import PropTypes from 'prop-types';
-import styles from './App.module.css';
+import styles from '../App.module.css';
+import { Input } from '../ui/Input';
 
 export default class ContactForm extends Component {
   state = {
@@ -16,6 +17,7 @@ export default class ContactForm extends Component {
   resetForm = () => {
     this.setState({ name: '', number: '', id: '' });
   };
+
   formSubmitHandler = e => {
     e.preventDefault();
     const contact = {
@@ -29,6 +31,7 @@ export default class ContactForm extends Component {
     this.props.addContact(contact);
     this.reset();
   };
+
   formChangeHandler = e => {
     const { name, value } = e.currentTarget;
 
@@ -48,10 +51,10 @@ export default class ContactForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.formChangeHandler} className={styles.form}>
+      <form onSubmit={this.formSubmitHandler} className={styles.form}>
         <label>
           Name:
-          <input
+          <Input
             type="text"
             name="name"
             placeholder="john doe"
