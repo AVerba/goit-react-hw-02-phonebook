@@ -24,11 +24,10 @@ export class App extends Component {
     }));
   };
 
-  onFilterInput = e => {
+  filterInputHandler = e => {
     this.setState({ filter: e.currentTarget.value });
   };
-
-  filterInputHandler = () => {
+  contactAfterFilter = () => {
     return [...this.state.contacts].filter(contact =>
       contact.name.toLowerCase().includes(this.state.filter.toLocaleLowerCase())
     );
