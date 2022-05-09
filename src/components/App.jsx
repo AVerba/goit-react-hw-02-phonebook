@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import shortid from 'shortid';
-
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
-import PropTypes from 'prop-types';
 import styles from './App.module.css';
 import ContactForm from './ContactForm/ContactForm';
 import { ContactFilter } from './ContactFilter';
 import { ContactList } from './ContactList';
 import { Title } from './ui/Title';
-import { Container } from './Container';
 
 export class App extends Component {
   state = {

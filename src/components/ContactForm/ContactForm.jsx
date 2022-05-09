@@ -32,18 +32,20 @@ export default class ContactForm extends Component {
 
   formChangeHandler = e => {
     const { name, value } = e.currentTarget;
-
     this.setState({ isDisabled: false, [name]: value });
-
-    const contactFinder = this.props.contacts.find(
-      contact =>
-        contact.name.toLowerCase() ===
-          value.toLowerCase().replace(/ +/g, ' ').trim() ||
-        contact.number === value
-    );
-    if (contactFinder) {
-      this.setState({ isDisabled: true });
-      Notify.warning(`${value} is already in contacts.`);
+  };
+  formCheckValueHandler = e => {
+    const { name, value } = e.currentTarget;
+    if (value) {
+      const contactFinder = this.props.contacts.find(contact =>
+        contact.name
+          .toLowerCase()
+          .includes(value.toLowerCase().replace(/ +/g, ' ').trim())
+      );
+      if (contactFinder) {
+        this.setState({ isDisabled: true });
+        Notify.warning(`${value} is already in contacts.`);
+      }
     }
   };
 
@@ -60,6 +62,7 @@ export default class ContactForm extends Component {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             value={this.state.name}
             onChange={e => this.formChangeHandler(e)}
+            onBlur={e => this.formCheckValueHandler(e)}
           />
         </label>
         <label>
