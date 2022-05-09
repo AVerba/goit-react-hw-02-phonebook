@@ -1,7 +1,5 @@
 import styles from './ContactFilter.module.css';
-import { Container } from '../Container';
-import { Title } from '../ui/Title';
-import { Input } from '../ui/Input';
+
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 

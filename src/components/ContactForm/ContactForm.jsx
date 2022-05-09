@@ -5,17 +5,15 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'react-phone-number-input/style.css';
 import PropTypes from 'prop-types';
 import styles from './ContactForm.module.css';
-import { Input } from '../ui/Input';
-import { Title } from '../ui/Title';
 
 export default class ContactForm extends Component {
   state = {
     name: '',
     number: '',
-    isDisabled: false,
+    isDisabled: true,
   };
   resetForm = () => {
-    this.setState({ name: '', number: '', id: '' });
+    this.setState({ name: '', number: '', id: '', isDisabled: true });
   };
 
   formSubmitHandler = e => {
@@ -29,7 +27,7 @@ export default class ContactForm extends Component {
     if (this.state.number.length !== 13)
       return Notify.failure('Enter valid number');
     this.props.addContact(contact);
-    this.reset();
+    this.resetForm();
   };
 
   formChangeHandler = e => {
@@ -39,13 +37,13 @@ export default class ContactForm extends Component {
 
     const contactFinder = this.props.contacts.find(
       contact =>
-        contact.name.toLowerCase() === value.toLowerCase() ||
+        contact.name.toLowerCase() ===
+          value.toLowerCase().replace(/ +/g, ' ').trim() ||
         contact.number === value
     );
     if (contactFinder) {
       this.setState({ isDisabled: true });
       Notify.warning(`${value} is already in contacts.`);
-      this.setState({ [name]: '' });
     }
   };
 
