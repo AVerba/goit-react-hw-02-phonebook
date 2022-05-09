@@ -37,10 +37,11 @@ export default class ContactForm extends Component {
   formCheckValueHandler = e => {
     const { name, value } = e.currentTarget;
     if (value) {
-      const contactFinder = this.props.contacts.find(contact =>
-        contact.name
-          .toLowerCase()
-          .includes(value.toLowerCase().replace(/ +/g, ' ').trim())
+      const contactFinder = this.props.contacts.find(
+        contact =>
+          contact.name.toLowerCase() ===
+          value.toLowerCase().replace(/ +/g, ' ').trim()
+        // .includes(value.toLowerCase().replace(/ +/g, ' ').trim())
       );
       if (contactFinder) {
         this.setState({ isDisabled: true });
