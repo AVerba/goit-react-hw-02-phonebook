@@ -1,6 +1,7 @@
 import styles from './Input.module.css';
 import { Title } from '../Title';
 import { Container } from '../../Container';
+import PropTypes from 'prop-types';
 
 export const Input = ({
   title,
@@ -27,4 +28,11 @@ export const Input = ({
       />
     </>
   );
+};
+Input.propTypes = {
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };

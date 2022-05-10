@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import shortid from 'shortid';
-import PhoneInput from 'react-phone-number-input';
+
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import 'react-phone-number-input/style.css';
+
 import PropTypes from 'prop-types';
 import styles from './ContactForm.module.css';
 
@@ -24,8 +26,9 @@ export default class ContactForm extends Component {
       number: this.state.number,
     };
     if (this.state.name.length === 0) return Notify.failure('Enter valid name');
-    if (this.state.number.length !== 13)
+    if (this.state.number.length <= 4)
       return Notify.failure('Enter valid number');
+
     this.props.addContact(contact);
     this.resetForm();
   };
@@ -66,17 +69,17 @@ export default class ContactForm extends Component {
             onBlur={e => this.formCheckValueHandler(e)}
           />
         </label>
+
         <label>
           Number:
           <PhoneInput
-            type="tel"
-            name="number"
-            defaultCountry="UA"
-            placeholder="000 00 00"
-            initialValueFormat="national"
-            className={styles.phoneInputCountry}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            country={'ua'}
+            regions={'europe'}
+            inputProps={{
+              name: 'number',
+              required: true,
+              autoFocus: true,
+            }}
             value={this.state.number}
             onChange={number => this.setState({ number })}
           />

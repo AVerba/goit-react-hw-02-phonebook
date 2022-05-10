@@ -51,9 +51,7 @@ export class App extends Component {
         <Title>Contacts</Title>
         <ContactFilter onInput={this.filterInputHandler} />
         <ContactList
-          contacts={this.state.contacts}
-          filter={this.state.filter}
-          contactAfterFilter={this.contactAfterFilter}
+          contacts={this.contactAfterFilter()}
           deleteContact={this.deleteContact}
         />
       </div>
