@@ -25,7 +25,6 @@ export default class ContactForm extends Component {
       name: this.state.name,
       number: this.state.number,
     };
-    if (this.state.name.length === 0) return Notify.failure('Enter valid name');
     if (this.state.number.length <= 4)
       return Notify.failure('Enter valid number');
 
@@ -38,13 +37,19 @@ export default class ContactForm extends Component {
     this.setState({ isDisabled: false, [name]: value });
   };
   formCheckValueHandler = e => {
-    const { name, value } = e.currentTarget;
+    const { value } = e.currentTarget;
+    const nameRegex =
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+    if (!nameRegex.test(value) || value.length === 0) {
+      return Notify.failure(
+        'Enter valid name.The name should to contain only Alphabet letter. Try again'
+      );
+    }
     if (value) {
       const contactFinder = this.props.contacts.find(
         contact =>
           contact.name.toLowerCase() ===
           value.toLowerCase().replace(/ +/g, ' ').trim()
-        // .includes(value.toLowerCase().replace(/ +/g, ' ').trim())
       );
       if (contactFinder) {
         this.setState({ isDisabled: true });
@@ -61,7 +66,6 @@ export default class ContactForm extends Component {
           <input
             type="text"
             name="name"
-            placeholder="John John"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             value={this.state.name}
